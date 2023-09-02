@@ -42,6 +42,14 @@ async function removeNote(id) {
   console.log(chalk.bgGreen(`Note whith id: ${id} removed!`))
 }
 
+async function editNote(id, title) {
+  const notes = await getNotes();
+  const index = notes.findIndex(note => note.id == id);
+  notes[index] = { ...notes[index], title }
+  await saveNotes(notes);
+  console.log(chalk.bgGreen(`Note whith id: ${id} changed title to "${title}"!`))
+}
+
 module.exports = {
-  addNote, printNotes, removeNote
+  addNote, printNotes, removeNote, editNote
 }
